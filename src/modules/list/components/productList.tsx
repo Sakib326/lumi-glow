@@ -292,7 +292,7 @@ export default function ProductList() {
               </div>
               <div className="pt-10 pb-4 text-center">
                 <h3 className="text-sm font-medium text-gray-900">
-                  <a href={`/products/${product.href}`}>
+                  <a href={`/products${product.href}`}>
                     <span aria-hidden="true" className="absolute inset-0" />
                     {product.name}
                   </a>
