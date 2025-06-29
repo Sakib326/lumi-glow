@@ -1,12 +1,5 @@
-import { useState } from "react";
-import "./App.css";
+import Header from "./modules/@common/@layout/public/header";
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <div className="text-3xl font-bold text-blue-500">Hello Tailwind v3!</div>
-  );
+export default function UserMenu() {
+  return <Header />;
 }
-
-export default App;
