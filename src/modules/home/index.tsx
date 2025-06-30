@@ -38,7 +38,7 @@ export default function HomePage() {
           <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
             <div className="sm:max-w-lg">
               <h1 className="font text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Summer styles are finally here
+                #1 mackup brand 
               </h1>
               <p className="mt-4 text-xl text-gray-500">
                 This year, our new summer collection will shelter you from the
@@ -134,7 +134,7 @@ export default function HomePage() {
                 id="category-heading"
                 className="text-2xl font-bold tracking-tight text-gray-900"
               >
-                Shop by Category
+                Grave the chance
               </h2>
               <a
                 href="#"
@@ -251,7 +251,8 @@ export default function HomePage() {
                 id="cause-heading"
                 className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
               >
-                Long-term thinking
+                "Future Focus"
+
               </h2>
               <p className="mt-3 text-xl text-white">
                 We're committed to responsible, sustainable, and ethical
@@ -277,7 +278,8 @@ export default function HomePage() {
                 id="favorites-heading"
                 className="text-2xl font-bold tracking-tight text-gray-900"
               >
-                Our Favorites
+                "Top Picks"
+
               </h2>
               <a
                 href="#"
@@ -332,9 +334,10 @@ export default function HomePage() {
                       id="sale-heading"
                       className="text-4xl font-bold tracking-tight text-white md:text-5xl"
                     >
-                      Final Stock.
+                      "Going Fast – Final Stock!"
+
                       <br />
-                      Up to 50% off.
+                      Up to 30% off.
                     </h2>
                     <div className="mt-6 text-base">
                       <a href="#" className="font-semibold text-white">
