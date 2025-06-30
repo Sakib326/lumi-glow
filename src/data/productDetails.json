@@ -1,0 +1,420 @@
+[
+  {
+    "name": "CeraVe Moisturising Cream",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "cerave-moisturising-cream",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳2500.00",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "Deeply moisturizing cream with ceramides for dry to very dry skin.",
+    "highlights": [
+      "Fragrance-free",
+      "Contains 3 essential ceramides",
+      "Developed with dermatologists"
+    ],
+    "imageSrc": "https://bk.shajgoj.com/storage/2020/11/CeraVe-Moisturising-Cream-1.jpg",
+    "imageAlt": "CeraVe moisturizing cream for dry skin"
+  },
+  {
+    "name": "Groome Beauty Blender Sponge - Yellow",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "groome-beauty-blender-yellow",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳98.00",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "Soft and bouncy makeup sponge for flawless foundation blending.",
+    "highlights": [
+      "Latex-free",
+      "Easy to clean",
+      "Perfect for creams and powders"
+    ],
+    "imageSrc": "https://bk.shajgoj.com/storage/2025/05/groome-beauty-blender-sponge-yellow.jpg",
+    "imageAlt": "Yellow beauty blender sponge"
+  },
+  {
+    "name": "Skin Cafe Micellar Water",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "skin-cafe-micellar-water",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳299.00",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "Gentle micellar cleanser for removing makeup and dirt effectively.",
+    "highlights": [
+      "No rinse formula",
+      "Alcohol-free",
+      "Suitable for all skin types"
+    ],
+    "imageSrc": "https://bk.shajgoj.com/storage/2023/11/SkinCafe-Micellar-Water-1.jpg",
+    "imageAlt": "Skin Cafe micellar water bottle"
+  },
+  {
+    "name": "PINKFLASH Waterproof Day Mascara",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "pinkflash-waterproof-day-mascara",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳350",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "Long-lasting waterproof mascara for all-day volume and curl.",
+    "highlights": ["Smudge-proof", "Jet black finish", "7ml tube"],
+    "imageSrc": "https://bk.shajgoj.com/storage/2023/06/PINKFLASH-Waterproof-Day-Mascara-7ml-PF-E0801.jpg",
+    "imageAlt": "PinkFlash mascara tube"
+  },
+  {
+    "name": "Glow & Lovely BB Multi Vitamin Cream",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "glow-lovely-bb-cream",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳185.00",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "BB cream enriched with vitamins and foundation for a natural glow.",
+    "highlights": ["SPF infused", "Suitable for daily use", "40gm pack"],
+    "imageSrc": "https://bk.shajgoj.com/storage/2024/12/glow-lovely-bb-multi-vitamin-cream-with-foundation-400-gm-2.jpg",
+    "imageAlt": "Glow & Lovely BB cream packaging"
+  },
+  {
+    "name": "3W Clinic Intensive UV Sunblock Cream SPF 50+",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "3w-clinic-sunblock-spf50",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳499.00",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "High protection sunblock cream with SPF 50+ PA+++ for daily use.",
+    "highlights": [
+      "Non-sticky finish",
+      "Whitening and anti-wrinkle",
+      "70ml tube"
+    ],
+    "imageSrc": "https://bk.shajgoj.com/storage/2019/08/3W-Clinic-Intensive-UV-Sunblock-Cream-SPF-50PA-70ML-7354-1.jpg",
+    "imageAlt": "3W Clinic sunblock cream"
+  },
+  {
+    "name": "Gucci A Winter Melody",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "gucci-a-winter-melody",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳12999.00",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "Luxurious Gucci fragrance with Cypress notes, perfect for winter.",
+    "highlights": [
+      "150ml eau de parfum",
+      "Limited edition",
+      "Elegant floral-cypress scent"
+    ],
+    "imageSrc": "https://bk.shajgoj.com/storage/2020/05/A-Winter-Melody-Cypress-150ml-acqua-profumata.jpg",
+    "imageAlt": "Gucci perfume bottle - A Winter Melody"
+  },
+  {
+    "name": "Lady Butterfly Bamboo Face Mask Brush",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "lady-butterfly-mask-brush",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳80",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "Soft bamboo brush for smooth and hygienic face mask application.",
+    "highlights": [
+      "Gold bristle",
+      "Eco-friendly bamboo handle",
+      "Easy to clean"
+    ],
+    "imageSrc": "https://bk.shajgoj.com/storage/2020/09/Groome-Face-Mask-Applying-Bamboo-Brush-Gold-Bristle.jpg",
+    "imageAlt": "Bamboo brush with gold bristle"
+  },
+  {
+    "name": "Topface Instyle Loose Powder - 104",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "topface-instyle-loose-powder",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳1450",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "Finely milled loose powder to set makeup and reduce shine.",
+    "highlights": ["Shade 104", "Matte finish", "Long wear formula"],
+    "imageSrc": "https://bk.shajgoj.com/storage/2020/12/Topface-Instyle-Loose-Powder-104.jpg",
+    "imageAlt": "Topface loose powder jar"
+  },
+  {
+    "name": "Simple Booster Serum - 3% Hyaluronic Acid & B5",
+    "reviewCount": 10,
+    "rating": 4,
+    "slug": "simple-booster-serum-hyaluronic-b5",
+    "version": {
+      "name": "1.0",
+      "date": "June 30, 2025",
+      "datetime": "2025-06-30"
+    },
+    "price": "৳1550",
+    "reviews": {
+      "average": 4,
+      "featured": [
+        {
+          "id": 1,
+          "rating": 5,
+          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "date": "July 16, 2021",
+          "datetime": "2021-07-16",
+          "author": "Emily Selman",
+          "avatarSrc": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        },
+        {
+          "id": 2,
+          "rating": 5,
+          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "date": "July 12, 2021",
+          "datetime": "2021-07-12",
+          "author": "Hector Gibbons",
+          "avatarSrc": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80"
+        }
+      ]
+    },
+    "description": "Hydrating booster serum with hyaluronic acid and vitamin B5.",
+    "highlights": [
+      "3% hyaluronic acid",
+      "Lightweight texture",
+      "Dermatologically tested"
+    ],
+    "imageSrc": "https://bk.shajgoj.com/storage/2023/07/Simple-Booster-Serum-3-Hyaluronic-Acid-amp-B59-1.jpg",
+    "imageAlt": "Simple booster serum bottle"
+  }
+]

@@ -1,23 +1,9 @@
 import { Fragment } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { Tab } from "@headlessui/react";
+import productsList from "../../data/productDetails.json";
+import { useParams } from "react-router-dom";
 
-const product = {
-  name: "Application UI Icon Pack",
-  version: { name: "1.0", date: "June 5, 2021", datetime: "2021-06-05" },
-  price: "$220",
-  description:
-    "The Application UI Icon Pack comes with over 200 icons in 3 styles: outline, filled, and branded. This playful icon pack is tailored for complex application user interfaces with a friendly and legible look.",
-  highlights: [
-    "200+ SVG icons in 3 unique styles",
-    "Compatible with Figma, Sketch, and Adobe XD",
-    "Drawn on 24 x 24 pixel grid",
-  ],
-  imageSrc:
-    "https://bk.shajgoj.com/storage/2025/06/swiss-beauty-vanity-box-silver-medium-1.jpg",
-  imageAlt:
-    "Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles.",
-};
 const reviews = {
   average: 4,
   featured: [
@@ -96,6 +82,13 @@ function classNames(...classes: any[]) {
 }
 
 export default function ProductDetails() {
+  const { slug } = useParams<{ slug: string }>();
+
+  let product = productsList.find((p) => p.slug === slug);
+  if (!product) {
+    return <div className="text-center text-red-500">Product not found</div>;
+  }
+
   return (
     <div className="bg-white">
       <div className="mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
