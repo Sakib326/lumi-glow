@@ -9,6 +9,7 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import ProductList from "./components/productList";
+import { href } from "react-router-dom";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
@@ -18,11 +19,11 @@ const sortOptions = [
   { name: "Price: High to Low", href: "#", current: false },
 ];
 const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
+  { name: "Makeup", href: "#"},
+  { name: "Skin", href: "#"},
+  { name: "Personal Care", href: "#"},
+  { name: "Fragrance", href:"#"},
+  { name: "Hair",href: "#"},
 ];
 const filters = [
   {
