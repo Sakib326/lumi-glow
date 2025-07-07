@@ -5,7 +5,7 @@ const favorites = [
     price: "$32",
     href: "#",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg",
+      "https://cdn-img.prettylittlething.com/8/f/2/3/8f23ad3861b0f158f887a6b62064a9dc563eaceb_CMP1945_1_basic_black_cotton_blend_fitted_crew_neck_t_shirt.jpg?imwidth=600",
     imageAlt: "Model wearing women's black cotton crewneck tee.",
   },
   {
@@ -14,7 +14,7 @@ const favorites = [
     price: "$32",
     href: "#",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg",
+      "https://yaya.eu/cdn/shop/files/oversized-fine-knitted-t-shirt-with-short-sleeves-1_c7cac59e-81a5-4440-a4d5-57c9e5115da3.jpg?v=1750858144&width=1400",
     imageAlt: "Model wearing women's off-white cotton crewneck tee.",
   },
   {
@@ -23,7 +23,7 @@ const favorites = [
     price: "$36",
     href: "#",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-03.jpg",
+      "https://i.localised.com/img/ae/product/71a4a10d-772c-441f-b57d-4d48a536ec43_LARGE.jpg",
     imageAlt:
       "Model wearing women's burgundy red crewneck artwork tee with small white triangle overlapping larger black triangle.",
   },
@@ -134,7 +134,7 @@ export default function HomePage() {
                 id="category-heading"
                 className="text-2xl font-bold tracking-tight text-gray-900"
               >
-                Grave the chance
+          Grave the chance
               </h2>
               <a
                 href="#"
@@ -148,7 +148,7 @@ export default function HomePage() {
             <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
               <div className="group aspect-w-2 aspect-h-1 overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-1 sm:row-span-2">
                 <img
-                  src="https://tailwindui.com/img/ecommerce-images/home-page-03-featured-category.jpg"
+                  src="https://m.media-amazon.com/images/I/41b-qJaxoSL.jpg"
                   alt="Two models wearing women's black cotton crewneck tee and off-white cotton crewneck tee."
                   className="object-cover object-center group-hover:opacity-75"
                 />
@@ -172,7 +172,7 @@ export default function HomePage() {
               </div>
               <div className="group aspect-w-2 aspect-h-1 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
                 <img
-                  src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
+                  src="https://m.media-amazon.com/images/I/71mRPc2s5XL._AC_SL1500_.jpg"
                   alt="Wooden shelf with gray and olive drab green baseball caps, next to wooden clothes hanger with sweaters."
                   className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
                 />
@@ -196,7 +196,7 @@ export default function HomePage() {
               </div>
               <div className="group aspect-w-2 aspect-h-1 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
                 <img
-                  src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
+                  src="https://www.objecttt.com/cdn/shop/products/STYLO-Desk-Organizer-Walnut-Objecttt_650x.jpg?v=1666559350"
                   alt="Walnut desk organizer set with white modular trays, next to porcelain mug on wooden desk."
                   className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
                 />
@@ -247,6 +247,7 @@ export default function HomePage() {
               className="absolute inset-0 bg-gray-900 bg-opacity-50"
             />
             <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
+              
               <h2
                 id="cause-heading"
                 className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
@@ -353,16 +354,16 @@ export default function HomePage() {
                         <div className="flex-shrink-0">
                           <img
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                            src="https://static.vecteezy.com/system/resources/previews/013/868/398/original/up-to-30-percent-off-3d-special-promotional-campaign-design-upto-30-of-3d-discount-offer-for-sale-and-marketing-free-vector.jpg"
-                            alt=""
+                            src="https://cdn2.mageplaza.com/media/general/OnWj0is.png"
+                            alt="NEW IDEAL ITEM"
                           />
                         </div>
 
                         <div className="mt-6 flex-shrink-0 sm:mt-0">
                           <img
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
-                            alt=""
+                            src="https://nonizbeauty.com/cdn/shop/files/beige_minimalist_makeup_promotion_Banner_1080_x_1080px_4.png?v=1691164089&width=1500"
+                            alt="Sale products"
                           />
                         </div>
                       </div>
@@ -370,16 +371,16 @@ export default function HomePage() {
                         <div className="flex-shrink-0">
                           <img
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg"
-                            alt=""
+                            src="https://essencemakeup.com/cdn/shop/files/20250410_Essence4286_wide_banner.jpg?v=1751487142"
+                            alt="beauty products on sale"
                           />
                         </div>
 
                         <div className="mt-6 flex-shrink-0 sm:mt-0">
                           <img
                             className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg"
-                            alt=""
+                            src="https://img.freepik.com/premium-vector/sets-cosmetics-white-background_43605-1474.jpg"
+                            alt="product sale"
                           />
                         </div>
                       </div>
@@ -411,3 +412,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+
