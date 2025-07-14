@@ -7,7 +7,7 @@ export default function Login() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       console.log("✅ Logged in:", user);
-      alert(`Welcome ${user.displayName}`);
+     alert(`Welcome ${user.displayName}`);
     } catch (error) {
       console.error("❌ Google Sign-In Error:", error);
       alert("Login Failed!");
