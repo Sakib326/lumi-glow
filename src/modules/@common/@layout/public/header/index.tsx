@@ -343,7 +343,7 @@ export default function Header() {
             </Popover.Group>
             <div className="flex items-center md:ml-12">
               <a
-                href="#"
+                href="login"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Sign in

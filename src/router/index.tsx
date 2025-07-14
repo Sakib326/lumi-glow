@@ -4,6 +4,7 @@ import HomePage from "../modules/home";
 import PublicLayout from "../modules/@common/@layout/public";
 import ListPage from "../modules/list";
 import ProductDetails from "../modules/productDetails";
+import Login from "../components/Login";
 
 const AppRouter = () => {
   return (
@@ -29,6 +30,7 @@ const AppRouter = () => {
           <Route index element={<HomePage />} />
           <Route path="products" element={<ListPage />} />
           <Route path="products/:slug" element={<ProductDetails />} />
+          <Route path="login" element={<Login />} />
         </Route>
       </Routes>
     </Suspense>
