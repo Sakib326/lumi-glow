@@ -5,6 +5,9 @@ import PublicLayout from "../modules/@common/@layout/public";
 import ListPage from "../modules/list";
 import ProductDetails from "../modules/productDetails";
 import Login from "../components/Login";
+import CheckoutPage from "../pages/CheckoutPage";
+import ThankYouPage from "../pages/ThankYouPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const AppRouter = () => {
   return (
@@ -26,15 +29,18 @@ const AppRouter = () => {
       }
     >
       <Routes>
-        <Route path="/" element={<PublicLayout />}>
+        <Route element={<PublicLayout />}>
           <Route index element={<HomePage />} />
           <Route path="products" element={<ListPage />} />
           <Route path="products/:slug" element={<ProductDetails />} />
           <Route path="login" element={<Login />} />
+          <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="thank-you" element={<ThankYouPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );
 };
 
-export default AppRouter;
+export default AppRouter
