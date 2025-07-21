@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Fragment } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { Tab } from "@headlessui/react";
@@ -11,7 +12,7 @@ const reviews = {
       id: 1,
       rating: 5,
       content: `
-        <p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>
+        <p>This product is exactly what I needed for my skincare routine. It works perfectly for my skin type!</p>
       `,
       date: "July 16, 2021",
       datetime: "2021-07-16",
@@ -23,7 +24,7 @@ const reviews = {
       id: 2,
       rating: 5,
       content: `
-        <p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>
+        <p>I'm amazed by how effective this product is. It has transformed my skin in just two weeks of regular use.</p>
       `,
       date: "July 12, 2021",
       datetime: "2021-07-12",
@@ -31,49 +32,26 @@ const reviews = {
       avatarSrc:
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
     },
-    // More reviews...
   ],
 };
+
 const faqs = [
   {
-    question: "What format are these icons?",
-    answer:
-      "The icons are in SVG (Scalable Vector Graphic) format. They can be imported into your design tool of choice and used directly in code.",
+    question: "How should I use this product?",
+    answer: "Apply a small amount to clean skin twice daily, morning and night.",
   },
   {
-    question: "Can I use the icons at different sizes?",
-    answer:
-      "Yes. The icons are drawn on a 24 x 24 pixel grid, but the icons can be scaled to different sizes as needed. We don't recommend going smaller than 20 x 20 or larger than 64 x 64 to retain legibility and visual balance.",
+    question: "Is this product suitable for sensitive skin?",
+    answer: "Yes, this product is dermatologically tested and suitable for all skin types.",
   },
-  // More FAQs...
 ];
+
 const license = {
   href: "#",
-  summary:
-    "For personal and professional use. You cannot resell or redistribute these icons in their original or modified state.",
+  summary: "For personal use only. Not for resale.",
   content: `
-    <h4>Overview</h4>
-    
-    <p>For personal and professional use. You cannot resell or redistribute these icons in their original or modified state.</p>
-    
-    <ul role="list">
-    <li>You\'re allowed to use the icons in unlimited projects.</li>
-    <li>Attribution is not required to use the icons.</li>
-    </ul>
-    
-    <h4>What you can do with it</h4>
-    
-    <ul role="list">
-    <li>Use them freely in your personal and professional work.</li>
-    <li>Make them your own. Change the colors to suit your project or brand.</li>
-    </ul>
-    
-    <h4>What you can\'t do with it</h4>
-    
-    <ul role="list">
-    <li>Don\'t be greedy. Selling or distributing these icons in their original or modified state is prohibited.</li>
-    <li>Don\'t be evil. These icons cannot be used on websites or applications that promote illegal or immoral beliefs or activities.</li>
-    </ul>
+    <h4>Usage Guidelines</h4>
+    <p>This product is intended for personal use only.</p>
   `,
 };
 
@@ -83,8 +61,25 @@ function classNames(...classes: any[]) {
 
 export default function ProductDetails() {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
 
-  let product = productsList.find((p) => p.slug === slug);
+  const handlePay = () => {
+    const product = productsList.find((p) => p.slug === slug);
+    if (!product) return;
+
+    navigate("/checkout", {
+      state: {
+        cart: [{
+          name: product.name,
+          price: parseFloat(product.price.replace("৳", "")),
+          imageSrc: product.imageSrc,
+          slug: product.slug
+        }]
+      }
+    });
+  };
+
+  const product = productsList.find((p) => p.slug === slug);
   if (!product) {
     return <div className="text-center text-red-500">Product not found</div>;
   }
@@ -92,7 +87,6 @@ export default function ProductDetails() {
   return (
     <div className="bg-white">
       <div className="mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        {/* Product */}
         <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
           {/* Product image */}
           <div className="lg:col-span-4 lg:row-end-1">
@@ -112,7 +106,6 @@ export default function ProductDetails() {
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                   {product.name}
                 </h1>
-
                 <h2 id="information-heading" className="sr-only">
                   Product information
                 </h2>
@@ -120,8 +113,7 @@ export default function ProductDetails() {
                   Version {product.version.name} (Updated{" "}
                   <time dateTime={product.version.datetime}>
                     {product.version.date}
-                  </time>
-                  )
+                  </time>)
                 </p>
               </div>
 
@@ -150,10 +142,12 @@ export default function ProductDetails() {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
               <button
                 type="button"
+                onClick={handlePay}
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
                 Pay {product.price}
               </button>
+
               <button
                 type="button"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 py-3 px-8 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
@@ -229,22 +223,6 @@ export default function ProductDetails() {
                     </svg>
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex h-6 w-6 items-center justify-center text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">Share on Twitter</span>
-                    <svg
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
-                    </svg>
-                  </a>
-                </li>
               </ul>
             </div>
           </div>
@@ -294,7 +272,6 @@ export default function ProductDetails() {
               <Tab.Panels as={Fragment}>
                 <Tab.Panel className="-mb-10">
                   <h3 className="sr-only">Customer Reviews</h3>
-
                   {reviews.featured.map((review, reviewIdx) => (
                     <div
                       key={review.id}
@@ -319,7 +296,6 @@ export default function ProductDetails() {
                         <p>
                           <time dateTime={review.datetime}>{review.date}</time>
                         </p>
-
                         <div className="mt-4 flex items-center">
                           {[0, 1, 2, 3, 4].map((rating) => (
                             <StarIcon
@@ -334,10 +310,6 @@ export default function ProductDetails() {
                             />
                           ))}
                         </div>
-                        <p className="sr-only">
-                          {review.rating} out of 5 stars
-                        </p>
-
                         <div
                           className="prose prose-sm mt-4 max-w-none text-gray-500"
                           dangerouslySetInnerHTML={{ __html: review.content }}
@@ -349,7 +321,6 @@ export default function ProductDetails() {
 
                 <Tab.Panel className="text-sm text-gray-500">
                   <h3 className="sr-only">Frequently Asked Questions</h3>
-
                   <dl>
                     {faqs.map((faq) => (
                       <Fragment key={faq.question}>
@@ -366,7 +337,6 @@ export default function ProductDetails() {
 
                 <Tab.Panel className="pt-10">
                   <h3 className="sr-only">License</h3>
-
                   <div
                     className="prose prose-sm max-w-none text-gray-500"
                     dangerouslySetInnerHTML={{ __html: license.content }}

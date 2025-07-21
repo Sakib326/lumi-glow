@@ -1,17 +1,22 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./modules/@common/@layout/public/header";
-import Login from "./components/Login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./components/HomePage";
+import ProductDetails from "./modules/productDetails/index";
+import CheckoutPage from "./pages/CheckoutPage";
+import ThankYouPage from "./pages/ThankYouPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
-export default function App() {
+const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        {/* Google Login Route */}
-        <Route path="/login" element={<Login />} />
-
-        {/* After login, show header via UserMenu */}
-        <Route path="/home" element={<Header />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products/:slug" element={<ProductDetails />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
-}
+};
+
+export default App;

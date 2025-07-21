@@ -16,7 +16,7 @@
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This moisturizer completely transformed my dry skin. After just one week of use, my skin feels hydrated and smooth all day long.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -25,7 +25,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>As a dermatologist, I recommend CeraVe to all my patients with dry skin conditions. The ceramide formula helps restore the skin barrier effectively.</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
@@ -59,7 +59,7 @@
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This beauty blender gives me the most flawless foundation application I've ever achieved. It's soft, bouncy, and doesn't absorb too much product.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -68,7 +68,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>After trying many beauty blenders, this one stands out for its durability. It maintains its shape after multiple washes and provides streak-free blending.</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
@@ -102,7 +102,7 @@
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This micellar water removes even waterproof makeup effortlessly without irritating my sensitive skin. It's now my daily go-to cleanser.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -111,7 +111,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>I love how this doesn't leave any residue after cleansing. My skin feels clean but not stripped of moisture. Perfect for travel too!</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
@@ -138,14 +138,14 @@
       "date": "June 30, 2025",
       "datetime": "2025-06-30"
     },
-    "price": "৳350",
+    "price": "৳350.00",
     "reviews": {
       "average": 4,
       "featured": [
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This mascara gives incredible volume without clumping. It stays put all day, even through workouts and humid weather.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -154,7 +154,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>The curved brush perfectly coats every lash. I get dramatic length and volume with just one coat - no need to layer multiple products.</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
@@ -163,7 +163,11 @@
       ]
     },
     "description": "Long-lasting waterproof mascara for all-day volume and curl.",
-    "highlights": ["Smudge-proof", "Jet black finish", "7ml tube"],
+    "highlights": [
+      "Smudge-proof",
+      "Jet black finish",
+      "7ml tube"
+    ],
     "imageSrc": "https://bk.shajgoj.com/storage/2023/06/PINKFLASH-Waterproof-Day-Mascara-7ml-PF-E0801.jpg",
     "imageAlt": "PinkFlash mascara tube"
   },
@@ -184,7 +188,7 @@
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This BB cream gives me perfect coverage while feeling lightweight. The vitamin infusion makes my skin glow naturally.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -193,7 +197,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>I use this every day instead of foundation. It evens out my skin tone while providing sun protection and skincare benefits.</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
@@ -202,7 +206,11 @@
       ]
     },
     "description": "BB cream enriched with vitamins and foundation for a natural glow.",
-    "highlights": ["SPF infused", "Suitable for daily use", "40gm pack"],
+    "highlights": [
+      "SPF infused",
+      "Suitable for daily use",
+      "40gm pack"
+    ],
     "imageSrc": "https://bk.shajgoj.com/storage/2024/12/glow-lovely-bb-multi-vitamin-cream-with-foundation-400-gm-2.jpg",
     "imageAlt": "Glow & Lovely BB cream packaging"
   },
@@ -223,7 +231,7 @@
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This sunblock provides strong protection without the white cast or greasy feel. Perfect under makeup for daily wear.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -232,7 +240,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>After using this for a month, I noticed my dark spots have lightened significantly. The whitening effect really works!</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
@@ -266,7 +274,7 @@
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This fragrance is absolutely divine - the perfect balance of floral and woody notes. It lasts all day and gets me so many compliments.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -275,7 +283,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>The cypress note makes this fragrance truly unique. It's sophisticated yet wearable for daytime. The bottle is also a beautiful collector's piece.</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
@@ -302,14 +310,14 @@
       "date": "June 30, 2025",
       "datetime": "2025-06-30"
     },
-    "price": "৳80",
+    "price": "৳80.00",
     "reviews": {
       "average": 4,
       "featured": [
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This brush applies face masks so evenly and hygienically. The bamboo handle feels luxurious and is eco-friendly.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -318,7 +326,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>Worth every penny! I use this for clay masks, sheet masks, and even when applying skincare serums. The gold bristles are gentle yet effective.</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
@@ -345,14 +353,14 @@
       "date": "June 30, 2025",
       "datetime": "2025-06-30"
     },
-    "price": "৳1450",
+    "price": "৳1450.00",
     "reviews": {
       "average": 4,
       "featured": [
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This powder sets my makeup perfectly without looking cakey. It blurs my pores and controls oil for hours.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -361,7 +369,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>The shade 104 matches my skin tone perfectly. A little goes a long way - this jar will last me months of daily use.</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
@@ -370,7 +378,11 @@
       ]
     },
     "description": "Finely milled loose powder to set makeup and reduce shine.",
-    "highlights": ["Shade 104", "Matte finish", "Long wear formula"],
+    "highlights": [
+      "Shade 104",
+      "Matte finish",
+      "Long wear formula"
+    ],
     "imageSrc": "https://bk.shajgoj.com/storage/2020/12/Topface-Instyle-Loose-Powder-104.jpg",
     "imageAlt": "Topface loose powder jar"
   },
@@ -384,14 +396,14 @@
       "date": "June 30, 2025",
       "datetime": "2025-06-30"
     },
-    "price": "৳1550",
+    "price": "৳1550.00",
     "reviews": {
       "average": 4,
       "featured": [
         {
           "id": 1,
           "rating": 5,
-          "content": "<p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>",
+          "content": "<p>This serum has transformed my dehydrated skin. After two weeks, my fine lines are less noticeable and my skin feels plump and hydrated.</p>",
           "date": "July 16, 2021",
           "datetime": "2021-07-16",
           "author": "Emily Selman",
@@ -400,7 +412,7 @@
         {
           "id": 2,
           "rating": 5,
-          "content": "<p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>",
+          "content": "<p>As someone with sensitive skin, I appreciate that this doesn't cause irritation. It layers beautifully under moisturizer and makeup.</p>",
           "date": "July 12, 2021",
           "datetime": "2021-07-12",
           "author": "Hector Gibbons",
