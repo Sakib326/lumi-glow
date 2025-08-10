@@ -7,6 +7,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Tab } from "@headlessui/react";
 import { useGetProductQuery } from "../../appStore/products/api";
+import { AddToCart } from "../../components/Cart";
 
 const reviews = {
   average: 4,
@@ -202,29 +203,19 @@ export default function ProductDetails() {
     );
   };
 
-  const { data: product, isLoading, error } = useGetProductQuery(id || "");
-
   const handleAddToCart = () => {
-    if (!product) return;
+    if (!product || product.stockStatus === "out_of_stock") return;
 
-    const imageUrl = product.featureImage?.path
-      ? getImageUrl(product.featureImage.path)
-      : "/placeholder-product.jpg";
+    AddToCart(product, 1);
 
-    navigate("/checkout", {
-      state: {
-        cart: [
-          {
-            id: product.id,
-            name: product.name,
-            price: product.discountPrice || product.price,
-            imageSrc: imageUrl,
-            quantity: 1,
-          },
-        ],
-      },
-    });
+    // Optional: Show success message or redirect to cart
+    console.log(`Added ${product.name} to cart`);
+
+    // You can uncomment this to redirect to cart after adding
+    // navigate('/cart');
   };
+
+  const { data: product, isLoading, error } = useGetProductQuery(id || "");
 
   if (isLoading) {
     return (
@@ -477,7 +468,13 @@ export default function ProductDetails() {
                     }`}
               </button>
 
-             
+              <button
+                type="button"
+                onClick={() => navigate("/cart")}
+                className="flex w-full items-center justify-center rounded-md border border-gray-300 bg-white py-3 px-8 text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+              >
+                View Cart
+              </button>
             </div>
 
             {/* Highlights */}

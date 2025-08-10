@@ -6,6 +6,7 @@ import {
 import { useState, useEffect } from "react";
 import { useGetProductsQuery } from "../../../appStore/products/api";
 import { useNavigate } from "react-router-dom";
+import { AddToCart } from "../../../components/Cart";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -62,6 +63,19 @@ export default function ProductList({
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedCategory, searchKeyword, activeFilters]);
+
+  const handleAddToCart = (product: any, event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (product.stockStatus === "out_of_stock") return;
+
+    AddToCart(product, 1);
+
+    // Optional: Show success message
+    // You can add a toast notification here
+    console.log(`Added ${product.name} to cart`);
+  };
 
   // Fetch products with current filters
   const {
@@ -359,15 +373,13 @@ export default function ProductList({
                     </button>
 
                     <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        // Add to cart logic here
-                        console.log("Added to cart:", product.id);
-                      }}
-                      className="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded-md text-sm font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200"
+                      onClick={(e) => handleAddToCart(product, e)}
+                      disabled={product.stockStatus === "out_of_stock"}
+                      className="w-full bg-gray-100 text-gray-800 py-2 px-4 rounded-md text-sm font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
                     >
-                      Add to Cart
+                      {product.stockStatus === "out_of_stock"
+                        ? "Out of Stock"
+                        : "Add to Cart"}
                     </button>
                   </div>
                 </div>

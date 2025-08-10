@@ -1,14 +1,15 @@
 import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "../modules/home";
+import Cart from "../components/Cart";
+import Login from "../components/Login";
+import Register from "../components/Register";
 import PublicLayout from "../modules/@common/@layout/public";
+import HomePage from "../modules/home";
 import ListPage from "../modules/list";
 import ProductDetails from "../modules/productDetails";
-import Login from "../components/Login";
 import CheckoutPage from "../pages/CheckoutPage";
-import ThankYouPage from "../pages/ThankYouPage";
 import NotFoundPage from "../pages/NotFoundPage";
-import Register from "../components/Register";
+import ThankYouPage from "../pages/ThankYouPage";
 
 const AppRouter = () => {
   return (
@@ -35,6 +36,7 @@ const AppRouter = () => {
           <Route path="products" element={<ListPage />} />
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="login" element={<Login />} />
+          <Route path="cart" element={<Cart />} />
           <Route path="register" element={<Register />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="thank-you" element={<ThankYouPage />} />

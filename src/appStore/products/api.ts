@@ -12,6 +12,7 @@ interface Product {
   price: string;
   discountPrice: string | null;
   featureImage: MediaEntity;
+  stockStatus: string;
 }
 
 interface ProductsResponse {

@@ -1,6 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -8,9 +6,11 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Fragment, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import ProductList from "./components/productList";
 import { useGetCategoriesQuery } from "../../appStore/products/api";
+import ProductList from "./components/productList";
 
 const sortOptions = [
   { name: "Most Popular", value: "popular", current: false },

@@ -6,8 +6,12 @@ import {
   ShoppingCartIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  getCartFromStorage,
+  getCartItemCount,
+} from "../../../../../components/Cart";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -44,7 +48,26 @@ const getUserInitials = (firstName: string = "", lastName: string = "") => {
 export default function Header() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [cartItemCount, setCartItemCount] = useState(0);
   const user = getAuthUser();
+
+  // Update cart count when component mounts and when cart changes
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = getCartFromStorage();
+      setCartItemCount(getCartItemCount(cart));
+    };
+
+    // Initial load
+    updateCartCount();
+
+    // Listen for cart updates
+    window.addEventListener("cartUpdated", updateCartCount);
+
+    return () => {
+      window.removeEventListener("cartUpdated", updateCartCount);
+    };
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,7 +128,6 @@ export default function Header() {
               >
                 Products
               </a>
-
               <a
                 href="/about"
                 className="text-base font-medium text-gray-500 hover:text-gray-900 transition-colors"
@@ -145,13 +167,15 @@ export default function Header() {
               >
                 <span className="sr-only">View cart</span>
                 <ShoppingCartIcon className="h-6 w-6" />
-                {/* Cart badge - you can add cart count here */}
-                <span className="absolute -top-1 -right-1 h-4 w-4 bg-indigo-600 text-white text-xs rounded-full flex items-center justify-center">
-                  0
-                </span>
+                {/* Cart badge */}
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-indigo-600 text-white text-xs rounded-full flex items-center justify-center font-medium">
+                    {cartItemCount > 99 ? "99+" : cartItemCount}
+                  </span>
+                )}
               </button>
 
-              {/* User Authentication */}
+              {/* User Authentication - Rest of the code remains the same */}
               {user ? (
                 /* Logged in user dropdown */
                 <Menu as="div" className="relative">
@@ -219,7 +243,6 @@ export default function Header() {
                           </a>
                         )}
                       </Menu.Item>
-
                       <Menu.Item>
                         {({ active }) => (
                           <a
@@ -272,7 +295,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - Rest remains the same but update cart count */}
       <Transition
         as={Fragment}
         enter="duration-200 ease-out"
@@ -332,12 +355,6 @@ export default function Header() {
                     Products
                   </a>
                   <a
-                    href="/categories"
-                    className="text-base font-medium text-gray-900 hover:text-gray-700"
-                  >
-                    Categories
-                  </a>
-                  <a
                     href="/about"
                     className="text-base font-medium text-gray-900 hover:text-gray-700"
                   >
@@ -354,13 +371,13 @@ export default function Header() {
                     className="flex items-center text-base font-medium text-gray-900 hover:text-gray-700"
                   >
                     <ShoppingCartIcon className="h-5 w-5 mr-2" />
-                    Cart (0)
+                    Cart ({cartItemCount})
                   </button>
                 </nav>
               </div>
             </div>
 
-            {/* Mobile Auth Section */}
+            {/* Mobile Auth Section - Rest remains the same */}
             <div className="py-6 px-5">
               {user ? (
                 <div className="space-y-4">
@@ -396,7 +413,6 @@ export default function Header() {
                     >
                       Orders
                     </a>
-
                     <button
                       onClick={handleLogout}
                       className="text-left text-base font-medium text-red-600 hover:text-red-700"
