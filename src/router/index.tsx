@@ -8,6 +8,7 @@ import Login from "../components/Login";
 import CheckoutPage from "../pages/CheckoutPage";
 import ThankYouPage from "../pages/ThankYouPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import Register from "../components/Register";
 
 const AppRouter = () => {
   return (
@@ -32,8 +33,9 @@ const AppRouter = () => {
         <Route element={<PublicLayout />}>
           <Route index element={<HomePage />} />
           <Route path="products" element={<ListPage />} />
-          <Route path="products/:slug" element={<ProductDetails />} />
+          <Route path="products/:id" element={<ProductDetails />} />
           <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="thank-you" element={<ThankYouPage />} />
         </Route>

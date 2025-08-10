@@ -349,7 +349,7 @@ export default function Header() {
                 Sign in
               </a>
               <a
-                href="#"
+                href="/register"
                 className="ml-8 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
               >
                 Sign up
@@ -458,7 +458,7 @@ export default function Header() {
               </div>
               <div className="mt-6">
                 <a
-                  href="#"
+                  href="/register"
                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                 >
                   Sign up

@@ -1,9 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { Fragment } from "react";
-import { StarIcon } from "@heroicons/react/20/solid";
+import { useNavigate, useParams } from "react-router-dom";
+import { Fragment, useRef, useState } from "react";
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  StarIcon,
+} from "@heroicons/react/20/solid";
 import { Tab } from "@headlessui/react";
-import productsList from "../../data/productDetails.json";
-import { useParams } from "react-router-dom";
+import { useGetProductQuery } from "../../appStore/products/api";
 
 const reviews = {
   average: 4,
@@ -38,11 +41,23 @@ const reviews = {
 const faqs = [
   {
     question: "How should I use this product?",
-    answer: "Apply a small amount to clean skin twice daily, morning and night.",
+    answer:
+      "Apply a small amount to clean skin twice daily, morning and night.",
   },
   {
     question: "Is this product suitable for sensitive skin?",
-    answer: "Yes, this product is dermatologically tested and suitable for all skin types.",
+    answer:
+      "Yes, this product is dermatologically tested and suitable for all skin types.",
+  },
+  {
+    question: "What are the main ingredients?",
+    answer:
+      "This product contains natural ingredients specifically formulated for effective skincare.",
+  },
+  {
+    question: "How long until I see results?",
+    answer:
+      "Most customers notice improvements within 2-4 weeks of consistent use.",
   },
 ];
 
@@ -52,6 +67,7 @@ const license = {
   content: `
     <h4>Usage Guidelines</h4>
     <p>This product is intended for personal use only.</p>
+    <p>Please read all instructions and ingredients before use.</p>
   `,
 };
 
@@ -59,30 +75,196 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+// Helper function to get image URL with null safety
+const getImageUrl = (path: string | undefined | null) => {
+  if (!path) return "/placeholder-product.jpg";
+  return path.startsWith("http")
+    ? path
+    : `${import.meta.env.VITE_API_URL}/uploads/${path}`;
+};
+
 export default function ProductDetails() {
-  const { slug } = useParams<{ slug: string }>();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const handlePay = () => {
-    const product = productsList.find((p) => p.slug === slug);
+  const parseAndTruncateHTML = (
+    htmlString: string,
+    maxLength: number = 200
+  ) => {
+    if (!htmlString) return { truncated: "", full: "", shouldTruncate: false };
+
+    // Create a temporary div to parse HTML
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = htmlString;
+
+    // Get text content without HTML tags
+    const textContent = tempDiv.textContent || tempDiv.innerText || "";
+
+    const shouldTruncate = textContent.length > maxLength;
+    const truncated = shouldTruncate
+      ? textContent.substring(0, maxLength) + "..."
+      : textContent;
+
+    return {
+      truncated,
+      full: textContent,
+      shouldTruncate,
+      hasHTML: htmlString !== textContent, // Check if original content had HTML
+    };
+  };
+
+  const EnhancedDescription = ({ description }: { description: string }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const descriptionRef = useRef<HTMLDivElement>(null);
+
+    const { truncated, full, shouldTruncate, hasHTML } = parseAndTruncateHTML(
+      description,
+      150
+    );
+
+    const toggleExpanded = () => {
+      setIsExpanded(!isExpanded);
+
+      // Smooth scroll to description when expanding
+      if (!isExpanded && descriptionRef.current) {
+        setTimeout(() => {
+          descriptionRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+          });
+        }, 100);
+      }
+    };
+
+    if (!shouldTruncate) {
+      return (
+        <div className="mt-6">
+          <h3 className="text-sm font-medium text-gray-900 mb-2">
+            Description
+          </h3>
+          <div className="text-gray-700 leading-relaxed">
+            {hasHTML ? (
+              <div
+                className="prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
+            ) : (
+              <p>{full}</p>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div ref={descriptionRef} className="mt-6">
+        <h3 className="text-sm font-medium text-gray-900 mb-2">Description</h3>
+        <div className="relative">
+          <div
+            className={`text-gray-700 leading-relaxed transition-all duration-300 ease-in-out ${
+              isExpanded ? "max-h-none" : "max-h-20 overflow-hidden"
+            }`}
+          >
+            {hasHTML ? (
+              <div
+                className="prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{
+                  __html: isExpanded ? description : truncated,
+                }}
+              />
+            ) : (
+              <p className="whitespace-pre-wrap">
+                {isExpanded ? full : truncated}
+              </p>
+            )}
+          </div>
+
+          {/* Gradient overlay when collapsed */}
+          {!isExpanded && (
+            <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+          )}
+
+          {/* Read More/Less Button */}
+          <button
+            onClick={toggleExpanded}
+            className="mt-3 flex items-center space-x-1 text-sm font-medium text-indigo-600 hover:text-indigo-700 transition-colors duration-200 group"
+          >
+            <span>{isExpanded ? "Show Less" : "Read More"}</span>
+            {isExpanded ? (
+              <ChevronUpIcon className="w-4 h-4 transform group-hover:-translate-y-0.5 transition-transform duration-200" />
+            ) : (
+              <ChevronDownIcon className="w-4 h-4 transform group-hover:translate-y-0.5 transition-transform duration-200" />
+            )}
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const { data: product, isLoading, error } = useGetProductQuery(id || "");
+
+  const handleAddToCart = () => {
     if (!product) return;
+
+    const imageUrl = product.featureImage?.path
+      ? getImageUrl(product.featureImage.path)
+      : "/placeholder-product.jpg";
 
     navigate("/checkout", {
       state: {
-        cart: [{
-          name: product.name,
-          price: parseFloat(product.price.replace("৳", "")),
-          imageSrc: product.imageSrc,
-          slug: product.slug
-        }]
-      }
+        cart: [
+          {
+            id: product.id,
+            name: product.name,
+            price: product.discountPrice || product.price,
+            imageSrc: imageUrl,
+            quantity: 1,
+          },
+        ],
+      },
     });
   };
 
-  const product = productsList.find((p) => p.slug === slug);
-  if (!product) {
-    return <div className="text-center text-red-500">Product not found</div>;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-indigo-600"></div>
+      </div>
+    );
   }
+
+  if (error || !product) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Product Not Found
+          </h1>
+          <p className="text-gray-500 mb-6">
+            The product you're looking for doesn't exist.
+          </p>
+          <button
+            onClick={() => navigate("/")}
+            className="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700"
+          >
+            Go Back Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const discountPercentage = product.discountPrice
+    ? Math.round(
+        ((product.price - product.discountPrice) / product.price) * 100
+      )
+    : 0;
+
+  // Safe feature image URL
+  const featureImageUrl = product.featureImage?.path
+    ? getImageUrl(product.featureImage.path)
+    : "/placeholder-product.jpg";
 
   return (
     <div className="bg-white">
@@ -92,11 +274,37 @@ export default function ProductDetails() {
           <div className="lg:col-span-4 lg:row-end-1">
             <div className="aspect-w-4 aspect-h-3 overflow-hidden rounded-lg bg-gray-100">
               <img
-                src={product.imageSrc}
-                alt={product.imageAlt}
-                className="object-cover object-center"
+                src={featureImageUrl}
+                alt={product.name || "Product image"}
+                className="object-cover object-center w-full h-full"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "/placeholder-product.jpg";
+                }}
               />
             </div>
+
+            {/* Gallery Images */}
+            {product.galleryImages && product.galleryImages.length > 0 && (
+              <div className="mt-4 grid grid-cols-4 gap-4">
+                {product.galleryImages.slice(0, 4).map((image, index) => (
+                  <div
+                    key={index}
+                    className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100"
+                  >
+                    <img
+                      src={getImageUrl(image?.path)}
+                      alt={`${product.name} ${index + 1}`}
+                      className="object-cover object-center w-full h-full cursor-pointer hover:opacity-75"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "/placeholder-product.jpg";
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Product details */}
@@ -104,17 +312,41 @@ export default function ProductDetails() {
             <div className="flex flex-col-reverse">
               <div className="mt-4">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                  {product.name}
+                  {product.name || "Unnamed Product"}
                 </h1>
                 <h2 id="information-heading" className="sr-only">
                   Product information
                 </h2>
-                <p className="mt-2 text-sm text-gray-500">
-                  Version {product.version.name} (Updated{" "}
-                  <time dateTime={product.version.datetime}>
-                    {product.version.date}
-                  </time>)
-                </p>
+
+                {/* Brand and Category */}
+                <div className="mt-2 flex items-center space-x-2 text-sm text-gray-500">
+                  {product.brand?.name && (
+                    <>
+                      <span>
+                        Brand:{" "}
+                        <span className="font-medium text-gray-700">
+                          {product.brand.name}
+                        </span>
+                      </span>
+                      <span>•</span>
+                    </>
+                  )}
+                  {product.category?.name && (
+                    <span>
+                      Category:{" "}
+                      <span className="font-medium text-gray-700">
+                        {product.category.name}
+                      </span>
+                    </span>
+                  )}
+                </div>
+
+                {/* SKU */}
+                {product.sku && (
+                  <p className="mt-1 text-sm text-gray-500">
+                    SKU: {product.sku}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -137,35 +369,140 @@ export default function ProductDetails() {
               </div>
             </div>
 
-            <p className="mt-6 text-gray-500">{product.description}</p>
+            {/* Price */}
+            <div className="mt-6">
+              <div className="flex items-center space-x-4">
+                <span className="text-3xl font-bold text-gray-900">
+                  ৳{product.discountPrice || product.price || 0}
+                </span>
+                {product.discountPrice && product.price && (
+                  <>
+                    <span className="text-xl text-gray-500 line-through">
+                      ৳{product.price}
+                    </span>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                      {discountPercentage}% OFF
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* Stock Status */}
+            <div className="mt-4">
+              <div className="flex items-center space-x-2">
+                <div
+                  className={`w-3 h-3 rounded-full ${
+                    product.stockStatus === "in_stock"
+                      ? "bg-green-500"
+                      : product.stockStatus === "low_stock"
+                      ? "bg-yellow-500"
+                      : "bg-red-500"
+                  }`}
+                ></div>
+                <span
+                  className={`text-sm font-medium ${
+                    product.stockStatus === "in_stock"
+                      ? "text-green-700"
+                      : product.stockStatus === "low_stock"
+                      ? "text-yellow-700"
+                      : "text-red-700"
+                  }`}
+                >
+                  {product.stockStatus === "in_stock"
+                    ? "In Stock"
+                    : product.stockStatus === "low_stock"
+                    ? "Low Stock"
+                    : "Out of Stock"}
+                </span>
+                <span className="text-sm text-gray-500">
+                  ({product.totalStock || 0} available)
+                </span>
+              </div>
+            </div>
+
+            {product.description && (
+              <EnhancedDescription description={product.description} />
+            )}
+
+            {/* Tags */}
+            {product.tags && product.tags.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-sm font-medium text-gray-900">Tags</h3>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {product.tags.map((tag) => (
+                    <span
+                      key={tag.id}
+                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
+                    >
+                      {tag.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Attributes */}
+            {product.attributes && product.attributes.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-sm font-medium text-gray-900">
+                  Specifications
+                </h3>
+                <div className="mt-2 space-y-2">
+                  {product.attributes.map((attr) => (
+                    <div key={attr.id} className="flex">
+                      <span className="text-sm font-medium text-gray-700 w-1/3">
+                        {attr.externalName}:
+                      </span>
+                      <span className="text-sm text-gray-500 w-2/3">
+                        {attr.values?.map((v) => v.value).join(", ") || "N/A"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
               <button
                 type="button"
-                onClick={handlePay}
-                className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                onClick={handleAddToCart}
+                disabled={product.stockStatus === "out_of_stock"}
+                className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
-                Pay {product.price}
+                {product.stockStatus === "out_of_stock"
+                  ? "Out of Stock"
+                  : `Add to Cart - ৳${
+                      product.discountPrice || product.price || 0
+                    }`}
               </button>
 
               <button
                 type="button"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 py-3 px-8 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
-                Preview
+                Add to Wishlist
               </button>
             </div>
 
-            <div className="mt-10 border-t border-gray-200 pt-10">
-              <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
-              <div className="prose prose-sm mt-4 text-gray-500">
-                <ul role="list">
-                  {product.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
+            {/* Highlights */}
+            {product.highlights && product.highlights.length > 0 && (
+              <div className="mt-10 border-t border-gray-200 pt-10">
+                <h3 className="text-sm font-medium text-gray-900">
+                  Highlights
+                </h3>
+                <div className="prose prose-sm mt-4 text-gray-500">
+                  <ul role="list">
+                    {product.highlights.map((highlight, index) => (
+                      <li key={index}>
+                        <strong>{highlight.title}:</strong>{" "}
+                        {highlight.description}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="mt-10 border-t border-gray-200 pt-10">
               <h3 className="text-sm font-medium text-gray-900">License</h3>
