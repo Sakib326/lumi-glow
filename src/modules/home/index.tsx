@@ -262,7 +262,7 @@ export default function HomePage() {
                   : "Grab the chance"}
               </h2>
               <a
-                href="/categories"
+                href="/products"
                 className="hidden text-sm font-semibold text-indigo-600 hover:text-indigo-500 sm:block"
               >
                 Browse all categories
@@ -388,7 +388,7 @@ export default function HomePage() {
 
             <div className="mt-6 sm:hidden">
               <a
-                href="/categories"
+                href="/products"
                 className="block text-sm font-semibold text-indigo-600 hover:text-indigo-500"
               >
                 Browse all categories
