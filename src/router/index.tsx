@@ -11,6 +11,10 @@ import CheckoutPage from "../pages/CheckoutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ThankYouPage from "../pages/ThankYouPage";
 import Checkout from "../components/Checkout";
+import Orders from "../components/Orders";
+import Profile from "../components/Profile";
+import About from "../components/About";
+import Contact from "../components/Contact";
 
 const AppRouter = () => {
   return (
@@ -37,8 +41,12 @@ const AppRouter = () => {
           <Route path="products" element={<ListPage />} />
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="login" element={<Login />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="orders" element={<Orders />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
           <Route path="register" element={<Register />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="thank-you" element={<ThankYouPage />} />

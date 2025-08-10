@@ -24,9 +24,7 @@ import {
 
 // Import checkout API (no shipping methods endpoint)
 import {
-  useConfirmCheckoutMutation,
-  useCreateCheckoutFromCartMutation,
-  useCreatePaymentIntentMutation,
+  useCreateCheckoutMutation,
   type CreateCheckoutRequest,
 } from "../appStore/checkout/api";
 
@@ -82,7 +80,7 @@ const getAuthUser = (): User | null => {
 // Hardcoded shipping methods (since no API endpoint)
 const SHIPPING_METHODS = [
   {
-    id: 1,
+    id: 7,
     name: "Standard Delivery",
     description: "Delivered within 3-5 business days",
     price: 60,
@@ -90,7 +88,7 @@ const SHIPPING_METHODS = [
     isActive: true,
   },
   {
-    id: 2,
+    id: 6,
     name: "Express Delivery",
     description: "Delivered within 1-2 business days",
     price: 120,
@@ -154,11 +152,10 @@ export default function Checkout() {
     useDeleteAddressMutation();
 
   // API hooks for checkout
-  const [createCheckoutFromCart] = useCreateCheckoutFromCartMutation();
-  const [confirmCheckout] = useConfirmCheckoutMutation();
-  const [createPaymentIntent] = useCreatePaymentIntentMutation();
+  const [createCheckout] = useCreateCheckoutMutation();
+  // const [createPaymentIntent] = useCreatePaymentIntentMutation();
 
-  const addresses: any = addressesResponse ? addressesResponse : [];
+  const addresses: any = addressesResponse || [];
   const shippingMethods = SHIPPING_METHODS;
 
   // Check authentication and cart on component mount
@@ -373,8 +370,14 @@ export default function Checkout() {
     setIsLoading(true);
 
     try {
-      // Create checkout from cart - billing address will be set same as shipping on backend
-      const checkoutData: Omit<CreateCheckoutRequest, "items"> = {
+      // Prepare items for checkout
+      const items = cart.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      }));
+
+      const checkoutData: CreateCheckoutRequest = {
+        items,
         billingAddressId: selectedShippingAddressId!,
         shippingAddressId: selectedShippingAddressId!,
         shippingMethodId: selectedShippingMethodId!,
@@ -383,37 +386,25 @@ export default function Checkout() {
         notes: notes || undefined,
       };
 
-      const checkoutResult = await createCheckoutFromCart(
-        checkoutData
-      ).unwrap();
-
-      let paymentDetails = {};
+      const checkoutResult = await createCheckout(checkoutData).unwrap();
+      console.log("Checkout created:", checkoutResult);
 
       if (paymentMethod === "stripe") {
-        const paymentIntent = await createPaymentIntent({
-          amount: Math.round(total * 100),
-          checkoutId: checkoutResult.checkout.id,
-        }).unwrap();
-
-        paymentDetails = {
-          paymentIntentId: paymentIntent.paymentIntentId,
-          clientSecret: paymentIntent.clientSecret,
-        };
+        // const paymentIntent = await createPaymentIntent({
+        //   amount: Math.round(total * 100),
+        //   checkoutId: checkoutResult.checkout.id,
+        // }).unwrap();
+        // paymentDetails = {
+        //   paymentIntentId: paymentIntent.paymentIntentId,
+        //   clientSecret: paymentIntent.clientSecret,
+        // };
       }
-
-      const orderResult = await confirmCheckout({
-        checkoutId: checkoutResult.checkout.id,
-        paymentDetails,
-      }).unwrap();
 
       saveCartToStorage([]);
 
-      navigate("/order-success", {
-        state: {
-          order: orderResult.order,
-          message: orderResult.message,
-        },
-      });
+      // Show success message and navigate to products
+      alert("Order placed successfully! Thank you for your purchase.");
+      navigate("/products");
     } catch (error: any) {
       console.error("Error placing order:", error);
       setErrors({

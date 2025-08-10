@@ -1,6 +1,64 @@
 import { apiSlice } from "../api_slice";
 
-// Base types for checkout
+// Product snapshot for order items
+export interface ProductSnapshot {
+  id: number;
+  name: string;
+  sku: string;
+  image: string;
+  category: number;
+}
+
+// Order item for user checkouts
+export interface UserCheckoutItem {
+  id: number;
+  quantity: number;
+  price: string;
+  total: string;
+  productSnapshot: ProductSnapshot;
+  __entity: string;
+}
+
+// Status for user checkouts
+export interface CheckoutStatus {
+  id: number;
+  name: string;
+  __entity: string;
+}
+
+// Coupon for user checkouts
+export interface CheckoutCoupon {
+  code: string;
+  __entity: string;
+}
+
+// User checkout/order type
+export interface UserCheckout {
+  id: number;
+  orderNumber: string;
+  shipping: string;
+  discount: string;
+  total: string;
+  createdAt: string;
+  items: UserCheckoutItem[];
+  status: CheckoutStatus;
+  coupon?: CheckoutCoupon;
+  __entity: string;
+}
+
+// Response for getUserCheckouts
+export interface GetUserCheckoutsResponse {
+  data: UserCheckout[];
+  total: number;
+}
+
+// Params for getUserCheckouts
+export interface GetUserCheckoutsParams {
+  limit?: number;
+  page?: number;
+}
+
+// --- Existing types for other endpoints (shortened for brevity) ---
 interface CheckoutItem {
   productId: number;
   quantity: number;
@@ -60,7 +118,6 @@ interface CheckoutItemWithProduct extends CheckoutItem {
   subtotal: number;
 }
 
-// Checkout creation request
 interface CreateCheckoutRequest {
   items: CheckoutItem[];
   billingAddressId: number;
@@ -71,7 +128,6 @@ interface CreateCheckoutRequest {
   notes?: string;
 }
 
-// Checkout response
 interface Checkout {
   id: number;
   userId: number;
@@ -94,39 +150,20 @@ interface Checkout {
   updatedAt: string;
 }
 
-// Create checkout response
 interface CreateCheckoutResponse {
   checkout: Checkout;
   message: string;
 }
 
-// Get user checkouts request params
-interface GetUserCheckoutsParams {
-  limit?: number;
-  page?: number;
-}
-
-// Get user checkouts response
-interface GetUserCheckoutsResponse {
-  checkouts: Checkout[];
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
-
-// Get checkout by ID response
 interface GetCheckoutResponse {
   checkout: Checkout;
 }
 
-// Create checkout from cart response
 interface CreateCheckoutFromCartResponse {
   checkout: Checkout;
   message: string;
 }
 
-// Validate coupon response
 interface ValidateCouponResponse {
   isValid: boolean;
   coupon?: Coupon;
@@ -134,14 +171,12 @@ interface ValidateCouponResponse {
   message: string;
 }
 
-// Stripe payment intent request
 interface CreatePaymentIntentRequest {
-  amount: number; // Amount in cents
+  amount: number;
   currency?: string;
   checkoutId?: number;
 }
 
-// Stripe payment intent response
 interface CreatePaymentIntentResponse {
   clientSecret: string;
   paymentIntentId: string;
@@ -149,7 +184,6 @@ interface CreatePaymentIntentResponse {
   currency: string;
 }
 
-// Error response
 interface CheckoutErrorResponse {
   message: string;
   errors?: Record<string, string[]>;
@@ -170,7 +204,7 @@ export const checkoutApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Checkout"],
     }),
 
-    // Get user checkouts with pagination
+    // Get user checkouts with pagination (NEW TYPE)
     getUserCheckouts: build.query<
       GetUserCheckoutsResponse,
       GetUserCheckoutsParams
@@ -188,9 +222,9 @@ export const checkoutApi = apiSlice.injectEndpoints({
         };
       },
       providesTags: (result) =>
-        result?.checkouts
+        result?.data
           ? [
-              ...result.checkouts.map(({ id }) => ({
+              ...result.data.map(({ id }) => ({
                 type: "Checkout" as const,
                 id,
               })),
@@ -345,8 +379,6 @@ export type {
   CreateCheckoutRequest,
   Checkout,
   CreateCheckoutResponse,
-  GetUserCheckoutsParams,
-  GetUserCheckoutsResponse,
   GetCheckoutResponse,
   CreateCheckoutFromCartResponse,
   ValidateCouponResponse,

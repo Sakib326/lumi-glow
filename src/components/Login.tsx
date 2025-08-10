@@ -95,7 +95,7 @@ export default function Login() {
         alert(
           `Welcome back, ${profileResult.firstName} ${profileResult.lastName}!`
         );
-        navigate("/dashboard");
+        navigate("/products");
       } catch (profileError) {
         console.warn(
           "⚠️ Failed to fetch profile, using login data:",
@@ -105,7 +105,7 @@ export default function Login() {
         alert(
           `Welcome back, ${loginResult.user.firstName} ${loginResult.user.lastName}!`
         );
-        navigate("/dashboard");
+        navigate("/products");
       }
     } catch (error: any) {
       console.error("❌ Login Error:", error);
@@ -127,7 +127,7 @@ export default function Login() {
       // Note: You'll need to implement Google OAuth on your backend
       // For now, we'll just show success
       alert(`Welcome ${user.displayName}!`);
-      navigate("/dashboard");
+      navigate("/products");
     } catch (error) {
       console.error("❌ Google Sign-In Error:", error);
       setErrors({
