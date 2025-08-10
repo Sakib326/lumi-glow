@@ -477,12 +477,7 @@ export default function ProductDetails() {
                     }`}
               </button>
 
-              <button
-                type="button"
-                className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 py-3 px-8 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-              >
-                Add to Wishlist
-              </button>
+             
             </div>
 
             {/* Highlights */}

@@ -1,13 +1,12 @@
-import { Fragment, useState } from "react";
-import { Popover, Transition, Menu } from "@headlessui/react";
+import { Menu, Popover, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import {
   Bars3Icon,
-  ShoppingCartIcon,
-  UserIcon,
   MagnifyingGlassIcon,
+  ShoppingCartIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function classNames(...classes: any) {
@@ -220,19 +219,7 @@ export default function Header() {
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="/wishlist"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Wishlist
-                          </a>
-                        )}
-                      </Menu.Item>
+
                       <Menu.Item>
                         {({ active }) => (
                           <a
@@ -409,12 +396,7 @@ export default function Header() {
                     >
                       Orders
                     </a>
-                    <a
-                      href="/wishlist"
-                      className="text-base font-medium text-gray-900 hover:text-gray-700"
-                    >
-                      Wishlist
-                    </a>
+
                     <button
                       onClick={handleLogout}
                       className="text-left text-base font-medium text-red-600 hover:text-red-700"
