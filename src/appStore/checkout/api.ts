@@ -66,7 +66,7 @@ interface CreateCheckoutRequest {
   billingAddressId: number;
   shippingAddressId: number;
   shippingMethodId: number;
-  paymentMethod: "cash" | "card" | "bkash" | "nagad" | "rocket";
+  paymentMethod: "cash" | "stripe";
   couponCode?: string;
   notes?: string;
 }
@@ -79,7 +79,7 @@ interface Checkout {
   billingAddress: Address;
   shippingAddress: Address;
   shippingMethod: ShippingMethod;
-  paymentMethod: "cash" | "card" | "bkash" | "nagad" | "rocket";
+  paymentMethod: "cash" | "card";
   coupon?: Coupon;
   couponCode?: string;
   notes?: string;
@@ -244,18 +244,6 @@ export const checkoutApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    // Get available shipping methods
-    getShippingMethods: build.query<
-      { shippingMethods: ShippingMethod[] },
-      void
-    >({
-      query: () => ({
-        url: "/api/v1/shipping-methods",
-        method: "GET",
-      }),
-      providesTags: ["ShippingMethod"],
-    }),
-
     // Apply coupon to checkout
     applyCoupon: build.mutation<
       ValidateCouponResponse,
@@ -337,7 +325,6 @@ export const {
   useGetCheckoutByIdQuery,
   useValidateCouponMutation,
   useCreatePaymentIntentMutation,
-  useGetShippingMethodsQuery,
   useApplyCouponMutation,
   useRemoveCouponMutation,
   useUpdateCheckoutMutation,
@@ -345,7 +332,6 @@ export const {
   useConfirmCheckoutMutation,
   useLazyGetUserCheckoutsQuery,
   useLazyGetCheckoutByIdQuery,
-  useLazyGetShippingMethodsQuery,
 } = checkoutApi;
 
 // Export types for use in components

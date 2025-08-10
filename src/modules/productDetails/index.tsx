@@ -79,9 +79,12 @@ function classNames(...classes: any[]) {
 // Helper function to get image URL with null safety
 const getImageUrl = (path: string | undefined | null) => {
   if (!path) return "/placeholder-product.jpg";
+
+  console.log(`Image path: ${path}`);
+
   return path.startsWith("http")
     ? path
-    : `${import.meta.env.VITE_API_URL}/uploads/${path}`;
+    : `${import.meta.env.VITE_API_URL}api/v1/media/single/${path}`;
 };
 
 export default function ProductDetails() {
@@ -252,10 +255,14 @@ export default function ProductDetails() {
       )
     : 0;
 
+  console.log("Product Details:", product.featureImage?.path);
+
   // Safe feature image URL
   const featureImageUrl = product.featureImage?.path
     ? getImageUrl(product.featureImage.path)
     : "/placeholder-product.jpg";
+
+  console.log(`Feature Image URL: ${featureImageUrl}`);
 
   return (
     <div className="bg-white">

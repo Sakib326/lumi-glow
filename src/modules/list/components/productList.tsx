@@ -18,7 +18,7 @@ const getImageUrl = (path: string | undefined | null) => {
     return "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=";
   return path.startsWith("http")
     ? path
-    : `${import.meta.env.VITE_API_URL}/uploads/${path}`;
+    : `${import.meta.env.VITE_API_URL}api/v1/media/single/${path}`;
 };
 
 // Types
