@@ -10,6 +10,7 @@ import ProductDetails from "../modules/productDetails";
 import CheckoutPage from "../pages/CheckoutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ThankYouPage from "../pages/ThankYouPage";
+import Checkout from "../components/Checkout";
 
 const AppRouter = () => {
   return (
@@ -37,6 +38,7 @@ const AppRouter = () => {
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="login" element={<Login />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
           <Route path="register" element={<Register />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="thank-you" element={<ThankYouPage />} />
