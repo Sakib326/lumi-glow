@@ -81,7 +81,7 @@ export default function ProductList({
 
   // Handle product click
   const handleProductClick = (productId: number) => {
-    navigate(`/product/${productId}`);
+    navigate(`/products/${productId}`);
   };
 
   // Calculate discount percentage

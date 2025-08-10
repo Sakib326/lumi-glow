@@ -136,7 +136,7 @@ export default function HomePage() {
         price: product?.price || fallbackTopPicks[index]?.price || "0",
         discountPrice: product?.discountPrice || null,
         discountPercentage,
-        href: `/product/${product?.id || index + 1}`,
+        href: `/products/${product?.id || index + 1}`,
         imageSrc: product?.featureImage?.path
           ? getImageUrl(product.featureImage.path)
           : fallbackTopPicks[index]?.imageSrc ||
