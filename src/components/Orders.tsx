@@ -87,10 +87,10 @@ export default function Orders() {
                 {order.status?.name || "UNKNOWN"}
               </span>
             </div>
-            <div className="mb-2">
+            {/* <div className="mb-2">
               <span className="text-gray-700 font-medium">Total: </span>
               <span>৳{order.total}</span>
-            </div>
+            </div> */}
             <div>
               <span className="text-gray-700 font-medium">Items:</span>
               <ul className="list-disc ml-6">

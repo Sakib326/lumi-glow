@@ -225,7 +225,7 @@ export default function Cart() {
                         {/* Product Image */}
                         <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24">
                           <img
-                            src={item.imageSrc}
+                            src={`${item.imageSrc}`}
                             alt={item.name}
                             className="w-full h-full object-cover rounded-lg"
                             onError={(e) => {

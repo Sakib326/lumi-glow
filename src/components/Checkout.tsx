@@ -10,6 +10,13 @@ import {
 import { Fragment, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getCartFromStorage, getCartTotal, saveCartToStorage } from "./Cart";
+import {
+  Elements,
+  useStripe,
+  useElements,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
+import { stripePromise } from "../config/stripe-config";
 
 // Import address API
 import {
@@ -22,9 +29,11 @@ import {
   type UpdateAddressRequest,
 } from "../appStore/addresses/api";
 
-// Import checkout API (no shipping methods endpoint)
+// Import checkout API
 import {
   useCreateCheckoutMutation,
+  useConfirmCheckoutMutation,
+  useCreatePaymentIntentMutation,
   type CreateCheckoutRequest,
 } from "../appStore/checkout/api";
 
@@ -83,7 +92,7 @@ const SHIPPING_METHODS = [
     id: 7,
     name: "Standard Delivery",
     description: "Delivered within 3-5 business days",
-    price: 60,
+    price: 70,
     estimatedDays: 3,
     isActive: true,
   },
@@ -97,6 +106,171 @@ const SHIPPING_METHODS = [
   },
 ];
 
+// Payment Form Component (integrated within Checkout)
+function PaymentForm({
+  total,
+  onSuccess,
+  onError,
+}: {
+  total: number;
+  onSuccess: () => void;
+  onError: (error: string) => void;
+}) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [isLoading, setIsLoading] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!stripe || !elements) {
+      onError("Stripe has not loaded yet. Please try again.");
+      return;
+    }
+
+    setIsLoading(true);
+    setPaymentError(null);
+
+    try {
+      // Confirm the payment with Stripe
+      const { error, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/payment-success`,
+        },
+        redirect: "if_required",
+      });
+
+      if (error) {
+        setPaymentError(error.message || "Payment failed. Please try again.");
+        onError(error.message || "Payment failed. Please try again.");
+      } else if (paymentIntent && paymentIntent.status === "succeeded") {
+        setPaymentSuccess(true);
+        setTimeout(() => {
+          onSuccess();
+        }, 2000);
+      } else {
+        setPaymentError("Payment is processing or requires additional action.");
+        onError("Payment is processing or requires additional action.");
+      }
+    } catch (err: any) {
+      console.error("Payment error:", err);
+      setPaymentError(
+        err.message || "An unexpected error occurred. Please try again."
+      );
+      onError(err.message || "An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (paymentSuccess) {
+    return (
+      <div className="text-center py-8">
+        <CheckCircleIcon className="mx-auto h-16 w-16 text-green-500 mb-4" />
+        <h3 className="text-lg font-medium text-gray-900 mb-2">
+          Payment Successful!
+        </h3>
+        <p className="text-gray-600">
+          Your payment of ৳{total.toFixed(2)} has been processed successfully.
+        </p>
+        <p className="text-sm text-gray-500 mt-2">Processing your order...</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Payment Summary */}
+      <div className="bg-gray-50 rounded-lg p-4">
+        <div className="flex justify-between items-center">
+          <span className="text-sm font-medium text-gray-700">
+            Total Amount:
+          </span>
+          <span className="text-lg font-bold text-gray-900">
+            ৳{total.toFixed(2)}
+          </span>
+        </div>
+      </div>
+
+      {/* Payment Error */}
+      {paymentError && (
+        <div className="bg-red-50 border border-red-200 rounded-md p-4">
+          <div className="flex">
+            <XCircleIcon className="h-5 w-5 text-red-400 mt-0.5" />
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-red-800">
+                Payment Error
+              </h3>
+              <p className="text-sm text-red-700 mt-1">{paymentError}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Payment Element */}
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-gray-700">
+          Payment Details
+        </label>
+        <div className="border border-gray-300 rounded-md p-4 bg-white">
+          <PaymentElement
+            options={{
+              layout: "tabs",
+              paymentMethodOrder: ["card", "ideal", "sepa_debit"],
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Terms and Conditions */}
+      <div className="text-xs text-gray-500 space-y-1">
+        <p>
+          By completing this payment, you agree to our{" "}
+          <a href="/terms" className="text-indigo-600 hover:text-indigo-700">
+            Terms of Service
+          </a>{" "}
+          and{" "}
+          <a href="/privacy" className="text-indigo-600 hover:text-indigo-700">
+            Privacy Policy
+          </a>
+          .
+        </p>
+        <p>Your payment information is encrypted and secure.</p>
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={!stripe || isLoading}
+        className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+      >
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+            Processing Payment...
+          </div>
+        ) : (
+          `Pay ৳${total.toFixed(2)}`
+        )}
+      </button>
+
+      {/* Security Notice */}
+      <div className="flex items-center justify-center text-xs text-gray-500">
+        <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            fillRule="evenodd"
+            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+        <span>Secured by Stripe - Your payment info is safe</span>
+      </div>
+    </form>
+  );
+}
 export default function Checkout() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -121,6 +295,13 @@ export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState<"cash" | "stripe">("cash");
   const [notes, setNotes] = useState("");
 
+  // Payment states
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [checkoutId, setCheckoutId] = useState<number | null>(null);
+  const [paymentStep, setPaymentStep] = useState<
+    "checkout" | "payment" | "success"
+  >("checkout");
+
   const [appliedCoupon, _] = useState<any>(null);
 
   // Address form state
@@ -141,7 +322,7 @@ export default function Checkout() {
     notes: "",
   });
 
-  // API hooks for addresses - Using list API with pagination
+  // API hooks for addresses
   const { data: addressesResponse, isLoading: addressesLoading } =
     useGetAddressesQuery();
   const [createAddress, { isLoading: isCreatingAddress }] =
@@ -153,7 +334,7 @@ export default function Checkout() {
 
   // API hooks for checkout
   const [createCheckout] = useCreateCheckoutMutation();
-  // const [createPaymentIntent] = useCreatePaymentIntentMutation();
+  const [createPaymentIntent] = useCreatePaymentIntentMutation();
 
   const addresses: any = addressesResponse || [];
   const shippingMethods = SHIPPING_METHODS;
@@ -363,7 +544,6 @@ export default function Checkout() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle order placement
   const handlePlaceOrder = async () => {
     if (!validateCheckoutForm()) return;
 
@@ -386,39 +566,149 @@ export default function Checkout() {
         notes: notes || undefined,
       };
 
-      const checkoutResult = await createCheckout(checkoutData).unwrap();
+      const checkoutResult: any = await createCheckout(checkoutData).unwrap();
       console.log("Checkout created:", checkoutResult);
 
-      if (paymentMethod === "stripe") {
-        // const paymentIntent = await createPaymentIntent({
-        //   amount: Math.round(total * 100),
-        //   checkoutId: checkoutResult.checkout.id,
-        // }).unwrap();
-        // paymentDetails = {
-        //   paymentIntentId: paymentIntent.paymentIntentId,
-        //   clientSecret: paymentIntent.clientSecret,
-        // };
+      // Handle different response structures
+      const checkoutId = checkoutResult.checkout?.id || checkoutResult.id;
+      if (!checkoutId) {
+        throw new Error("Invalid checkout response - no ID found");
       }
 
-      saveCartToStorage([]);
+      setCheckoutId(checkoutId);
 
-      // Show success message and navigate to products
-      alert("Order placed successfully! Thank you for your purchase.");
-      navigate("/products");
+      if (paymentMethod === "stripe") {
+        // Create payment intent for Stripe
+        const paymentIntent = await createPaymentIntent({
+          amount: Math.round(total * 100), // Convert to cents
+          currency: "usd",
+          checkoutId: checkoutId,
+        }).unwrap();
+
+        setClientSecret(paymentIntent.clientSecret);
+        setPaymentStep("payment");
+      } else {
+        // For COD, order is placed immediately with checkout API
+        saveCartToStorage([]);
+        setPaymentStep("success");
+        setTimeout(() => {
+          navigate("/orders");
+        }, 3000);
+      }
     } catch (error: any) {
       console.error("Error placing order:", error);
       setErrors({
         general:
-          error.data?.message || "Failed to place order. Please try again.",
+          error?.data?.message ||
+          error?.message ||
+          "Failed to place order. Please try again.",
       });
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Handle successful payment
+  const handlePaymentSuccess = async () => {
+    try {
+      // Payment successful, order is already created
+      saveCartToStorage([]);
+      setPaymentStep("success");
+      setTimeout(() => {
+        navigate("/orders");
+      }, 3000);
+    } catch (error) {
+      console.error("Error processing successful payment:", error);
+      setErrors({
+        general:
+          "Payment successful but there was an issue. Please contact support.",
+      });
+    }
+  };
+
+  // Handle payment error
+  const handlePaymentError = (error: string) => {
+    setErrors({ general: `Payment failed: ${error}` });
+    setPaymentStep("checkout");
+  };
+
   // Don't render if not authenticated or no cart
   if (!user || cart.length === 0) {
     return null;
+  }
+
+  // Show success message
+  if (paymentStep === "success") {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="max-w-md mx-auto text-center">
+          <CheckCircleIcon className="mx-auto h-16 w-16 text-green-500 mb-4" />
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            Order Placed Successfully!
+          </h1>
+          <p className="text-gray-600 mb-4">
+            Thank you for your purchase. Your order has been confirmed.
+          </p>
+          <p className="text-sm text-gray-500 mb-4">
+            You will be redirected to your orders page in a few seconds...
+          </p>
+          <button
+            onClick={() => navigate("/orders")}
+            className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700"
+          >
+            View Orders
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Show payment form if Stripe payment is selected
+  if (paymentStep === "payment" && clientSecret) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">
+              Complete Payment
+            </h1>
+            <p className="mt-2 text-sm text-gray-600">
+              Total amount: ৳{total.toFixed(2)}
+            </p>
+          </div>
+
+          {errors.general && (
+            <div className="mb-6 bg-red-50 border border-red-200 rounded-md p-4">
+              <div className="flex">
+                <XCircleIcon className="h-5 w-5 text-red-400" />
+                <div className="ml-3">
+                  <p className="text-sm text-red-800">{errors.general}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="bg-white shadow rounded-lg p-6">
+            <Elements stripe={stripePromise} options={{ clientSecret }}>
+              <PaymentForm
+                total={total}
+                onSuccess={handlePaymentSuccess}
+                onError={handlePaymentError}
+              />
+            </Elements>
+
+            <div className="mt-4 text-center">
+              <button
+                onClick={() => setPaymentStep("checkout")}
+                className="text-indigo-600 hover:text-indigo-700 text-sm font-medium"
+              >
+                ← Back to checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -668,8 +958,8 @@ export default function Checkout() {
                     },
                     {
                       value: "stripe",
-                      label: "Stripe",
-                      description: "Pay securely with stripe",
+                      label: "Credit/Debit Card",
+                      description: "Pay securely with Stripe",
                     },
                   ].map((method) => (
                     <div key={method.value} className="flex items-center">
@@ -815,6 +1105,8 @@ export default function Checkout() {
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
                       Processing...
                     </div>
+                  ) : paymentMethod === "stripe" ? (
+                    `Continue to Payment - ৳${total.toFixed(2)}`
                   ) : (
                     `Place Order - ৳${total.toFixed(2)}`
                   )}
