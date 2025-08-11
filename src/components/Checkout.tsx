@@ -80,7 +80,7 @@ const getAuthUser = (): User | null => {
 // Hardcoded shipping methods (since no API endpoint)
 const SHIPPING_METHODS = [
   {
-    id: 7,
+    id: 1,
     name: "Standard Delivery",
     description: "Delivered within 3-5 business days",
     price: 60,
@@ -88,7 +88,7 @@ const SHIPPING_METHODS = [
     isActive: true,
   },
   {
-    id: 6,
+    id: 2,
     name: "Express Delivery",
     description: "Delivered within 1-2 business days",
     price: 120,
